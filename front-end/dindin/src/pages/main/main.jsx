@@ -9,7 +9,6 @@ import SignUp from "../signUp/signUp";
 function Main() {
   return (
     <div className="containerMain">
-      <h2>Main Page</h2>
       <SignIn />
       <SignUp />
     </div>

@@ -1,0 +1,19 @@
+.innerLogo {
+  position: absolute;
+  top: 42px;
+  left: 100px;
+}
+
+.outterLogo {
+  position: absolute;
+  top: 37px;
+  left: 96px;
+}
+
+.logoText {
+  position: absolute;
+  top: 39px;
+  left: 145px;
+  color: #ffffff;
+  font-size: 24px;
+}
