@@ -1,6 +1,5 @@
 import "./style.css";
-import SignIn from "../signIn/signIn";
-// import SignUp from "../signUp/signUp";
+import Header from "../../components/header";
 
 //todo Necessário inserir modal no botão de adicionar registro com um formulário.
 
@@ -9,8 +8,9 @@ import SignIn from "../signIn/signIn";
 function Main() {
   return (
     <div className="containerMain">
-      <SignIn />
-      {/* <SignUp /> */}
+      <header>
+        <Header />
+      </header>
     </div>
   );
 }
