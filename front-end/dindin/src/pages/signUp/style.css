@@ -1,0 +1,83 @@
+.containerContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../../assets/background-main.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.formContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 513px;
+  height: 500px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.formContent label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  font-family: "Rubik";
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.formContent form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.formContent input {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+
+  padding: 6px;
+}
+
+form h2 {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+
+  color: #7978d9;
+}
+
+.btnRegister {
+  background: #7978d9;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+
+  width: 449px;
+  height: 53px;
+}
+
+form span {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+
+  color: #7b61ff;
+}
+
+form a {
+  text-decoration: none;
+  color: #7b61ff;
+  margin-left: 5px;
+}
