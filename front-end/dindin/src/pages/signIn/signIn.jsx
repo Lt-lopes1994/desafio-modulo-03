@@ -16,12 +16,12 @@ function SignIn() {
           </p>
         </div>
         <div>
-          <button className="btn register">Cadastrar-se</button>
+          <button className="btn register-btn">Cadastrar-se</button>
         </div>
       </div>
 
       <div className="right">
-        <h4>Login</h4>
+        <h2>Login</h2>
         <form className="signInForm">
           <label>
             E-mail
@@ -31,7 +31,9 @@ function SignIn() {
             Password
             <input type="password" />
           </label>
-          <button className="btn enter">Entrar</button>
+          <div>
+            <button className="btn enter-btn">Entrar</button>
+          </div>
         </form>
       </div>
     </div>

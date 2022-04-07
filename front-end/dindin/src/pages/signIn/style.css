@@ -21,12 +21,36 @@
   margin-left: 100px;
 }
 
+.left strong {
+  color: #7978d9;
+}
+
 .leftContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: left;
-  width: 400px;
+  width: 600px;
+}
+
+.leftContent h1,
+p {
+  color: #fff;
+}
+
+.leftContent h1 {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 52px;
+  margin-bottom: 33px;
+}
+
+.leftContent p {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
 }
 
 .right {
@@ -34,13 +58,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 535px;
+  height: 435px;
+  width: 513px;
   margin: 25px;
   background-color: #fff;
   margin-right: 200px;
 }
 
-.left strong {
+.right h2 {
+  margin-bottom: 55px;
+
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 500;
   color: #7978d9;
 }
 
@@ -69,6 +99,7 @@ label {
   height: 28px;
   background-color: #fff;
   padding: 5px;
+  margin-bottom: 30px;
 }
 
 .btn {
@@ -76,10 +107,31 @@ label {
   border-radius: 5px;
   width: 184px;
   height: 52px;
-  margin-top: 10px;
 
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.register-btn {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+
+  margin-top: 50px;
+  width: 300px;
+  height: 48px;
+}
+
+.enter-btn {
+  margin-top: 20px;
+  width: 300px;
+  height: 40px;
+
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
 }
