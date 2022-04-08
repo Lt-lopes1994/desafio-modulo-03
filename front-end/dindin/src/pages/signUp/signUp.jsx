@@ -1,7 +1,10 @@
 import "./style.css";
 import Logo from "../../components/logo/";
+import { useState } from "react";
 
 function SignUp() {
+  const [form, setForm] = useState([]);
+
   return (
     <div className="containerContent">
       <Logo />

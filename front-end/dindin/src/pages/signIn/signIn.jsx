@@ -1,19 +1,35 @@
 import "./style.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../components/logo/";
 
 function SignIn() {
-  const [form, setForm] = useState({ email: "", senha: "" });
+  const navigate = useNavigate();
 
-  const handleChangeForm = (e) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      if (!email || !password) {
+        alert("Preencha todos os campos ou cadastre-se");
+        return;
+      }
+
+      navigate("/main");
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  }
+
+  function handleSignUp(e) {
     e.preventDefault();
 
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+    console.log("aqui");
 
+    navigate("/signUp");
+  }
   return (
     <div className="containerContent">
       <Logo />
@@ -22,28 +38,43 @@ function SignIn() {
           <h1>
             Controle suas <strong>finanças</strong>, sem planilha chata.
           </h1>
+
           <p>
             Organizar as suas finanças nunca foi tão fácil, com o DINDIN, você
             tem tudo num único lugar e em um clique de distância.
           </p>
         </div>
+
         <div>
-          <button className="btn register-btn">Cadastrar-se</button>
+          <button onClick={handleSignUp} className="btn register-btn">
+            Cadastrar-se
+          </button>
         </div>
       </div>
 
       <div className="right">
         <h2>Login</h2>
-        <form className="signInForm">
+        <form className="signInForm" onSubmit={handleSubmit}>
           <label>
             E-mail
-            <input name="email" value={form.email} type="text" />
+            <input
+              name="email"
+              value={email}
+              type="text"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </label>
 
           <label>
-            Password
-            <input name="password" value={form.password} type="password" />
+            Senha
+            <input
+              name="password"
+              value={password}
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </label>
+
           <div>
             <button className="btn enter-btn">Entrar</button>
           </div>
