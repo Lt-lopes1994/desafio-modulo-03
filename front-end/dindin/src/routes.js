@@ -4,7 +4,7 @@ import SignUp from "./pages/signUp/signUp.jsx";
 import Main from "./pages/home/main.jsx";
 
 function ProtectedRoutes({ redirectTo }) {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
 
   return isAuthenticated ? <Outlet /> : <Navigate to={redirectTo} />;
 }

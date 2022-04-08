@@ -1,7 +1,19 @@
 import "./style.css";
+import { useState } from "react";
 import Logo from "../../components/logo/";
 
 function SignIn() {
+  const [form, setForm] = useState({ email: "", senha: "" });
+
+  const handleChangeForm = (e) => {
+    e.preventDefault();
+
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div className="containerContent">
       <Logo />
@@ -25,11 +37,12 @@ function SignIn() {
         <form className="signInForm">
           <label>
             E-mail
-            <input type="text" />
+            <input name="email" value={form.email} type="text" />
           </label>
+
           <label>
             Password
-            <input type="password" />
+            <input name="password" value={form.password} type="password" />
           </label>
           <div>
             <button className="btn enter-btn">Entrar</button>
