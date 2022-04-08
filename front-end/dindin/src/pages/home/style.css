@@ -1,8 +1,45 @@
-.containerMain {
-  width: 100vw;
-  height: 100vh;
+.containerBody {
+  max-height: 240px;
+}
+
+.table {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
+  text-align: center;
+
+  width: 964px;
+  height: 58px;
+}
+
+.tableDetails {
+  display: flex;
+  flex-direction: wrap;
   align-items: center;
+  justify-content: space-around;
+  margin-bottom: 5px;
+}
+
+.tableDetails img {
+  cursor: pointer;
+  margin-bottom: 3px;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: wrap;
+  align-items: center;
+  justify-content: space-around;
+  margin: 9px 0px 10px 0;
+}
+
+.icons {
+  position: absolute;
+  right: 150px;
+
+  cursor: pointer;
+}
+
+.icons img {
+  margin-left: 15px;
 }
