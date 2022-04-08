@@ -4,6 +4,6 @@ const usuarios=require('./controladores/usuarios');
 const rotas=express();
 
 //rotas
-rotas.post('/usuarios', usuarios.cadastrarUsuario);
+rotas.post('/usuario', usuarios.cadastrarUsuario);
 
 module.exports=rotas;
