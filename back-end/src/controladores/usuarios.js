@@ -4,24 +4,12 @@ const bcrypt=require('bcrypt');
 async function cadastrarUsuario(req, res){
     const {nome, email, senha}=req.body;
 
-    if(!nome){
-        return res.status(404).json('O campo nome é obrigatório');
-    }
-
-    if(!email){
-        return res.status(404).json('O campo email é obrigatório');
-    }
-
-    if(!senha){
-        return res.status(404).json('O campo senha é obrigatório');
-    }
-
     try {
         const queryConsultaEmail='select * from usuarios where email=$1';
         const consultaEmail=await conexao.query(queryConsultaEmail, [email]);
 
         if(consultaEmail.rowCount>0){
-            return res.status(404).json({mensagem: "Já existe usuário cadastrado com o e-mail informado."});
+            return res.status(404).json({mensagem: 'Já existe usuário cadastrado com o e-mail informado.'});
         }
 
         const senhaCriptografada=await bcrypt.hash(senha, 10);
@@ -30,7 +18,7 @@ async function cadastrarUsuario(req, res){
         const usuarioInserido=await conexao.query(queryUsuarioInserido, [nome, email, senhaCriptografada]);
 
         if(usuarioInserido.rowCount===0){
-            return res.status(400).json('Não foi possivel cadastrar o usuário');
+            return res.status(400).json({mensagem: 'Não foi possivel cadastrar o usuário'});
         }
 
         const queryConsultaUsuario='select * from usuarios where email=$1';
@@ -44,7 +32,58 @@ async function cadastrarUsuario(req, res){
     }
 }
 
+async function detalharUsuario(req, res){
+    const {usuario}=req;
+
+    try {
+        const queryConsultaUsuario='select * from usuarios where id=$1';
+        const consultaUsuario=await conexao.query(queryConsultaUsuario, [usuario.id]);
+
+        if(consultaUsuario.rowCount===0){
+            return res.status(404).json({mensagem: 'O usuário não foi encontrado'});
+        }
+
+        return res.status(200).json(usuario);    
+    } catch (error) {
+        return res.status(500).json({mensagem: error.message});
+    }
+}
+
+async function atualizarUsuario(req, res){
+    const {nome, email, senha}=req.body;
+    const {usuario}=req;
+
+    try {
+        const queryConsultaUsuario='select * from usuarios where id=$1';
+        const consultaUsuario=await conexao.query(queryConsultaUsuario, [usuario.id]);
+
+        if(consultaUsuario.rowCount===0){
+            return res.status(404).json({mensagem: 'O usuário não foi encontrado'});
+        }
+
+        const queryConsultaEmail='select * from usuarios where email=$1';
+        const consultaEmail=await conexao.query(queryConsultaEmail, [email]);
+
+        if(consultaEmail.rowCount>0){
+            return res.status(404).json({mensagem: 'Já existe usuário cadastrado com o e-mail informado.'});
+        }
+        
+        const senhaCriptografada=await bcrypt.hash(senha, 10);
+
+        const queryAtualizaUsuario='update usuarios set nome=$1, email=$2, senha=$3 where id=$4';
+        const atualizaUsuario=await conexao.query(queryAtualizaUsuario, [nome, email, senhaCriptografada, usuario.id]);
+
+        if(atualizaUsuario.rowCount===0){
+            return res.status(404).json({mensagem: 'Não foi possível atualizar os dados do usuário'});
+        }
+    } catch (error) {
+        return res.status(500).json({mensagem: error.message});
+    }
+}
+
 
 module.exports={
-    cadastrarUsuario
+    cadastrarUsuario,
+    detalharUsuario,
+    atualizarUsuario
 }

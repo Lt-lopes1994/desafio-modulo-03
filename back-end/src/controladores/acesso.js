@@ -7,7 +7,7 @@ async function logarUsuario(req, res){
     const {email, senha}=req.body;
 
     if(!email || !senha){
-        return res.status(404).json('Email e senha são obrigatórios.');
+        return res.status(404).json({mensagem: 'Email e senha são obrigatórios.'});
     }
 
     try {
@@ -15,7 +15,7 @@ async function logarUsuario(req, res){
         const usuarioEmail=await conexao.query(queryVerificaEmail, [email]);
 
         if(usuarioEmail.rowCount===0){
-            return res.status(404).json('Usuário não encontrado');
+            return res.status(404).json({mensagem: 'Usuário não encontrado'});
         }
 
         const usuario=usuarioEmail.rows[0];
@@ -23,13 +23,13 @@ async function logarUsuario(req, res){
         const senhaVerificada=await bcrypt.compare(senha, usuario.senha);
 
         if(!senhaVerificada){
-            return res.status(400).json("Email e/ou senha incorreto(s).");
+            return res.status(400).json({mensagem: 'Email e/ou senha incorreto(s).'});
         }
 
         const token = jwt.sign(
             {id: usuario.id}, 
             segredo, {
-            expiresIn: "5d"
+            expiresIn: '5d'
         });
 
         const dadosUsuario={
