@@ -1,15 +1,19 @@
 import "./style.css";
 import Header from "../../components/header";
 import Filter from "../../components/filter";
+import Modal from "../../components/modal";
+
 import ArrowFilter from "../../assets/arrowFilterIcon.svg";
 import EditIcon from "../../assets/editIcon.svg";
 import DeleteIcon from "../../assets/deleteIcon.svg";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Main() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   function handlePopup() {
     filter ? setFilter(false) : setFilter(true);
@@ -81,10 +85,17 @@ function Main() {
               </div>
             </div>
 
-            <button className="btn btn-add">Adicionar registro</button>
+            <button
+              type="button"
+              onClick={() => setShowModal(true)}
+              className="btn btn-add"
+            >
+              Adicionar registro
+            </button>
           </div>
         </div>
       </div>
+      <Modal showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 }
