@@ -43,8 +43,10 @@
   box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 
-  width: 959px;
+  width: 800px;
   height: 270px;
+  margin-right: 160px;
+  padding: 8px;
 }
 
 .filterOptions {
