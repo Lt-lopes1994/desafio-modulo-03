@@ -4,12 +4,25 @@ import Filter from "../../components/filter";
 import ArrowFilter from "../../assets/arrowFilterIcon.svg";
 import EditIcon from "../../assets/editIcon.svg";
 import DeleteIcon from "../../assets/deleteIcon.svg";
+import { useNavigate } from "react-router-dom";
 
 function Main() {
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    // localStorage.removeItem("token");
+
+    try {
+      navigate("/");
+    } catch (error) {
+      alert(error.response.data);
+    }
+  }
+
   return (
     <div className="containerMain">
       <header>
-        <Header />
+        <Header handleLogout={handleLogout} />
       </header>
       <div className="containerBody">
         <div className="filter">{/* <Filter /> */}</div>
