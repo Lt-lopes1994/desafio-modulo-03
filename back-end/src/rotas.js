@@ -8,19 +8,21 @@ const transacoes=require('./controladores/transacoes');
 
 const rotas=express();
 
-//login
 rotas.post('/login', acesso.logarUsuario);
-//cadastro de usuário
+
 rotas.post('/usuario', validaCampo.validarCampos, usuarios.cadastrarUsuario);
-//autenticação de usuário
+
 rotas.get('/usuario', autenticaLogin.autenticarLogin, usuarios.detalharUsuario);
 rotas.put('/usuario', autenticaLogin.autenticarLogin, validaCampo.validarCampos, usuarios.atualizarUsuario);
-//listagem de categorias
-rotas.get('/categoria', categorias.listarCategoriasUsuario);
-//transações
-rotas.get('/transacao', autenticaLogin.autenticarLogin, transacoes.listarTransacoesUsuario);
-rotas.get('/transacao/:id', autenticaLogin.autenticarLogin, transacoes.detalharTransacaoUsuario);
+
+rotas.get('/categoria', autenticaLogin.autenticarLogin, categorias.listarCategoriasUsuario);
+
 rotas.post('/transacao', autenticaLogin.autenticarLogin, validaCampo.validarCampos2, transacoes.cadastrarTransacaoUsuario);
+rotas.get('/transacao', autenticaLogin.autenticarLogin, transacoes.listarTransacoesUsuario);
+rotas.get('/transacao/extrato', autenticaLogin.autenticarLogin, transacoes.obterExtratoTransacoesUsuario);
+rotas.get('/transacao/:id', autenticaLogin.autenticarLogin, transacoes.detalharTransacaoUsuario);
+rotas.put('/transacao/:id', autenticaLogin.autenticarLogin, validaCampo.validarCampos2, transacoes.atualizarTransacaoUsuario);
+rotas.delete('/transacao/:id', autenticaLogin.autenticarLogin, transacoes.exclirTransacaoUsuario);
 
 
 module.exports=rotas;

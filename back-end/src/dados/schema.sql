@@ -46,24 +46,3 @@ values
 
 
 
-alter table transacoes
-alter column usuario_id
-drop not null;
-
-
-insert into transacoes(descricao, valor, data, categoria_id, tipo)
-values 
-('transferencia', 30000, now(), 3, 'entrada');
-
-delete from transacoes where id=19;
-alter table transacoes
-alter column usuario_id
-set not null;
-
-select * from categorias where id=18;
-
-select * from transacoes where usuario_id=10;
-
-select descricao from categorias where id=10;
-
-select categoria_id.descricao from transacoes where usuario_id=11;

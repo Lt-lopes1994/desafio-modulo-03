@@ -76,6 +76,8 @@ async function atualizarUsuario(req, res){
         if(atualizaUsuario.rowCount===0){
             return res.status(404).json({mensagem: 'Não foi possível atualizar os dados do usuário'});
         }
+
+        return res.status(204).json();
     } catch (error) {
         return res.status(500).json({mensagem: error.message});
     }
