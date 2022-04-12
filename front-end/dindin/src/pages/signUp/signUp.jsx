@@ -44,10 +44,10 @@ function SignUp() {
   }
 
   return (
-    <div className="containerContent">
+    <div className="containerContentSignUp">
       <Logo />
       <div className="formContent">
-        <form onSubmit={handleSubmit}>
+        <form className="registerForm" onSubmit={handleSubmit}>
           <h2>Cadastre-se</h2>
           <label>
             Nome

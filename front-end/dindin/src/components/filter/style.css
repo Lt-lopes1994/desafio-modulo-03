@@ -15,8 +15,8 @@
   height: 30px;
 
   position: absolute;
-  top: 130px;
   left: 200px;
+  top: 230px;
   text-align: center;
 }
 
@@ -45,6 +45,7 @@
 
   width: 800px;
   height: 270px;
+  margin-top: 80px;
   margin-right: 160px;
   padding: 8px;
 }

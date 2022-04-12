@@ -1,7 +1,19 @@
 import "./style.css";
 import closeIcon from "../../assets/closeIcon.svg";
+import { useState } from "react";
 
-function Modal({ showModal, setShowModal }) {
+function Modal({ showModal, setShowModal, modalName, setModalName }) {
+  const [buttonEntries, setButtonEntries] = useState(true);
+  const [buttonExits, setButtonExits] = useState(false);
+
+  function handleButtonEntries() {
+    buttonEntries ? setButtonEntries(true) : setButtonExits(false);
+  }
+
+  function handleButtonsExits() {
+    buttonExits ? setButtonExits(true) : setButtonEntries(false);
+  }
+
   function handleCloseModal() {
     setShowModal(false);
   }
@@ -11,14 +23,24 @@ function Modal({ showModal, setShowModal }) {
         <div className="containerModal">
           <div className="modal">
             <div className="modalHeader">
-              <h2>Adicionar Registro</h2>
+              <h2>{modalName}</h2>
               <img src={closeIcon} alt="close" onClick={handleCloseModal} />
             </div>
             <div className="containerBtn">
-              <button type="button" className="btnEntries">
+              <button
+                type="button"
+                className="btnEntries"
+                onClick={() => handleButtonEntries()}
+              >
                 Entrada
               </button>
-              <button type="button" className="btnExits">
+
+              <button
+                type="button"
+                className="btnExits"
+                onClick={() => handleButtonsExits()}
+                style={{ background: buttonExits ? "# #ff576b" : "#B9B9B9" }}
+              >
                 Saida
               </button>
             </div>
@@ -30,7 +52,7 @@ function Modal({ showModal, setShowModal }) {
                   <input type="text" />
                 </label>
 
-                <label for="category">
+                <label>
                   Categoria
                   <select id="pet-select">
                     <option value="">--Selecione--</option>
@@ -56,7 +78,7 @@ function Modal({ showModal, setShowModal }) {
                   </select>
                 </label>
 
-                <label for="start">
+                <label>
                   Data
                   <input type="text" />
                 </label>

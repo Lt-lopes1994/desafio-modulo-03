@@ -31,9 +31,9 @@ function SignIn() {
     navigate("/signUp");
   }
   return (
-    <div className="containerContent">
+    <div className="containerContentSignIn">
       <Logo />
-      <div className="left">
+      <div className="leftSigIn">
         <div className="leftContent">
           <h1>
             Controle suas <strong>finanças</strong>, sem planilha chata.
@@ -52,7 +52,7 @@ function SignIn() {
         </div>
       </div>
 
-      <div className="right">
+      <div className="rightSignIn">
         <h2>Login</h2>
         <form className="signInForm" onSubmit={handleSubmit}>
           <label>

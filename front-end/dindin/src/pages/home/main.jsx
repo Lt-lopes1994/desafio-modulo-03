@@ -14,9 +14,14 @@ function Main() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [modalName, setModalName] = useState("");
 
   function handlePopup() {
     filter ? setFilter(false) : setFilter(true);
+  }
+
+  function handleModal(e) {
+    setModalName(e.target.name);
   }
 
   async function handleLogout() {
@@ -87,7 +92,9 @@ function Main() {
 
             <button
               type="button"
+              name="Adicionar Registro"
               onClick={() => setShowModal(true)}
+              onChange={(e) => handleModal(e)}
               className="btn btn-add"
             >
               Adicionar registro
@@ -95,7 +102,12 @@ function Main() {
           </div>
         </div>
       </div>
-      <Modal showModal={showModal} setShowModal={setShowModal} />
+      <Modal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        modalName={modalName}
+        setModalName={setModalName}
+      />
     </div>
   );
 }
