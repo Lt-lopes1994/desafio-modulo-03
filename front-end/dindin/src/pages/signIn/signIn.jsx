@@ -1,6 +1,7 @@
 import "./style.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
 import Logo from "../../components/logo/";
 
 function SignIn() {
@@ -9,20 +10,6 @@ function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      if (!email || !password) {
-        alert("Preencha todos os campos ou cadastre-se");
-        return;
-      }
-
-      navigate("/main");
-    } catch (error) {
-      console.log(error.response.data.message);
-    }
-  }
-
   function handleSignUp(e) {
     e.preventDefault();
 
@@ -30,6 +17,31 @@ function SignIn() {
 
     navigate("/signUp");
   }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!email || !password) {
+      alert("Preencha todos os campos ou cadastre-se");
+      return;
+    }
+
+    try {
+      const response = await api.post("/login", {
+        email: email,
+        senha: password,
+      });
+
+      const token = response.data.token;
+
+      localStorage.setItem("token", token);
+
+      navigate("/main");
+    } catch (error) {
+      console.log(error.data);
+    }
+  }
+
   return (
     <div className="containerContentSignIn">
       <Logo />
@@ -76,7 +88,9 @@ function SignIn() {
           </label>
 
           <div>
-            <button className="btn enter-btn">Entrar</button>
+            <button type="submit" className="btn enter-btn">
+              Entrar
+            </button>
           </div>
         </form>
       </div>

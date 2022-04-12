@@ -47,7 +47,6 @@ form input {
 }
 
 .btnEntries {
-  background: #3a9ff1;
   border-radius: 10px 0px 0px 10px;
 
   width: 145px;
@@ -55,11 +54,22 @@ form input {
 }
 
 .btnExits {
-  background: #ff576b;
   border-radius: 0px 10px 10px 0px;
 
   width: 145px;
   height: 30px;
+}
+
+.btnColorsBlue {
+  background: #3a9ff1;
+}
+
+.btnColorsRed {
+  background: #ff576b;
+}
+
+.btnFalse {
+  background: #b9b9b9;
 }
 
 .btnConfirm {

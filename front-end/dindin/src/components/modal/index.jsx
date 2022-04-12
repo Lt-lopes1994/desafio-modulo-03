@@ -7,11 +7,13 @@ function Modal({ showModal, setShowModal, modalName, setModalName }) {
   const [buttonExits, setButtonExits] = useState(false);
 
   function handleButtonEntries() {
-    buttonEntries ? setButtonEntries(true) : setButtonExits(false);
+    setButtonEntries(true);
+    setButtonExits(false);
   }
 
   function handleButtonsExits() {
-    buttonExits ? setButtonExits(true) : setButtonEntries(false);
+    setButtonExits(true);
+    setButtonEntries(false);
   }
 
   function handleCloseModal() {
@@ -29,7 +31,9 @@ function Modal({ showModal, setShowModal, modalName, setModalName }) {
             <div className="containerBtn">
               <button
                 type="button"
-                className="btnEntries"
+                className={`btnEntries ${
+                  buttonEntries ? "btnColorsBlue" : "btnFalse"
+                }`}
                 onClick={() => handleButtonEntries()}
               >
                 Entrada
@@ -37,9 +41,10 @@ function Modal({ showModal, setShowModal, modalName, setModalName }) {
 
               <button
                 type="button"
-                className="btnExits"
+                className={`btnExits ${
+                  buttonExits ? "btnColorsRed" : "btnFalse"
+                }`}
                 onClick={() => handleButtonsExits()}
-                style={{ background: buttonExits ? "# #ff576b" : "#B9B9B9" }}
               >
                 Saida
               </button>

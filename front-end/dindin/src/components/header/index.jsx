@@ -4,7 +4,8 @@ import ProfileIcon from "../../assets/profileIcon.svg";
 import LogoutIcon from "../../assets/logout.svg";
 import closeIcon from "../../assets/closeIcon.svg";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
 
 function Header({ handleLogout }) {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ function Header({ handleLogout }) {
     password: "",
     passwordConfirmation: "",
   });
+  const [user, setUser] = useState({});
 
   function handleChangeForm(e) {
     setForm({
@@ -26,6 +28,24 @@ function Header({ handleLogout }) {
 
   function handleCloseMenu() {
     setShowMenu(false);
+  }
+
+  useEffect(() => {
+    userData();
+  }, []);
+
+  async function userData() {
+    try {
+      //! Autorização. Função de autorização necessária pra validar o usuario.
+      const response = await api.get("/usuario", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+
+      setUser(response.data);
+      console.log(user);
+    } catch (error) {
+      console.log(error.data);
+    }
   }
 
   async function handleSubmit(e) {
@@ -123,7 +143,7 @@ function Header({ handleLogout }) {
           )}
         </div>
         <div className="userContainer">
-          <span>Bruno</span>
+          <span>{user.nome}</span>
         </div>
         <img
           className="logoutIcon"

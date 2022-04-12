@@ -16,16 +16,17 @@ function Main() {
   const [showModal, setShowModal] = useState(false);
   const [modalName, setModalName] = useState("");
 
+  function handleEditModal(e) {
+    setShowModal(true);
+    setModalName(e.target.name);
+  }
+
   function handlePopup() {
     filter ? setFilter(false) : setFilter(true);
   }
 
-  function handleModal(e) {
-    setModalName(e.target.name);
-  }
-
   async function handleLogout() {
-    // localStorage.removeItem("token");
+    localStorage.removeItem("token");
 
     try {
       navigate("/");
@@ -61,7 +62,12 @@ function Main() {
               <span>Pix</span>
               <span>R$100</span>
               <div className="icons">
-                <img src={EditIcon} alt="Editar" />
+                <img
+                  name="Editar Registro"
+                  onClick={(e) => handleEditModal(e)}
+                  src={EditIcon}
+                  alt="Editar"
+                />
                 <img src={DeleteIcon} alt="Deletar" />
               </div>
             </div>
@@ -93,8 +99,7 @@ function Main() {
             <button
               type="button"
               name="Adicionar Registro"
-              onClick={() => setShowModal(true)}
-              onChange={(e) => handleModal(e)}
+              onClick={(e) => handleEditModal(e)}
               className="btn btn-add"
             >
               Adicionar registro
