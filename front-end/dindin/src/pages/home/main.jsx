@@ -37,20 +37,6 @@ function Main() {
     }
   }
 
-  async function handleTransactions() {
-    try {
-      const response = await api.get("/transacao", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
-      setTransactions(response.data);
-    } catch (error) {
-      alert(error.response.data);
-    }
-  }
-
   return (
     <div className="containerMain">
       <header>
@@ -77,7 +63,13 @@ function Main() {
                 <span>{transaction.data}</span>
                 <span>{transaction.descricao}</span>
                 <span>{transaction.categoria_nome}</span>
-                <span>{transaction.valor}</span>
+                <span
+                  style={{
+                    color: `${transaction.tipo} = entrada ? #7B61FF : #FA8C10 `,
+                  }}
+                >
+                  {transaction.valor}
+                </span>
                 <div className="icons">
                   <img
                     name="Editar Registro"
@@ -97,7 +89,7 @@ function Main() {
               <div className="financialEntries">
                 <div className="entries">
                   <span>Entradas</span>
-                  <span className="entriesValues">R$100</span>
+                  <span className="entriesValues">{}</span>
                 </div>
 
                 <div className="exits">
