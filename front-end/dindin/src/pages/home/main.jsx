@@ -9,12 +9,14 @@ import DeleteIcon from "../../assets/deleteIcon.svg";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
 
 function Main() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalName, setModalName] = useState("");
+  const [transactions, setTransactions] = useState([]);
 
   function handleEditModal(e) {
     setShowModal(true);
@@ -30,6 +32,20 @@ function Main() {
 
     try {
       navigate("/");
+    } catch (error) {
+      alert(error.response.data);
+    }
+  }
+
+  async function handleTransactions() {
+    try {
+      const response = await api.get("/transacao", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      setTransactions(response.data);
     } catch (error) {
       alert(error.response.data);
     }
@@ -55,22 +71,24 @@ function Main() {
               <h3>Categoria</h3>
               <h3>Valor</h3>
             </div>
-            <div className="userDetails">
-              <span>07/04/2022</span>
-              <span>Quinta</span>
-              <span>Venda de doces</span>
-              <span>Pix</span>
-              <span>R$100</span>
-              <div className="icons">
-                <img
-                  name="Editar Registro"
-                  onClick={(e) => handleEditModal(e)}
-                  src={EditIcon}
-                  alt="Editar"
-                />
-                <img src={DeleteIcon} alt="Deletar" />
+            {transactions.map((transaction) => (
+              <div className="userDetails">
+                <span>{transaction.data}</span>
+                <span>{transaction.data}</span>
+                <span>{transaction.descricao}</span>
+                <span>{transaction.categoria_nome}</span>
+                <span>{transaction.valor}</span>
+                <div className="icons">
+                  <img
+                    name="Editar Registro"
+                    onClick={(e) => handleEditModal(e)}
+                    src={EditIcon}
+                    alt="Editar"
+                  />
+                  <img src={DeleteIcon} alt="Deletar" />
+                </div>
               </div>
-            </div>
+            ))}
           </div>
 
           <div className="right">
