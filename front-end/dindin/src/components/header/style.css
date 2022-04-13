@@ -13,27 +13,24 @@
   background-repeat: no-repeat;
 }
 
-.profileIcon {
-  position: absolute;
-  right: 182px;
-  top: 30px;
+.containerProfile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  margin-left: 1050px;
+}
+
+.profileIcon {
   cursor: pointer;
 }
 
-.userContainer {
-  position: absolute;
-  right: 130px;
-  top: 45px;
-
+.userName {
   color: #fff;
+  margin-right: 5px;
 }
 
 .logoutIcon {
-  position: absolute;
-  right: 90px;
-  top: 45px;
-
   cursor: pointer;
 }
 

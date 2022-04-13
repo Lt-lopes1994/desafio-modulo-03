@@ -32,7 +32,7 @@ function Header({ handleLogout }) {
 
   useEffect(() => {
     userData();
-  }, []);
+  }, []); // eslint-disable-line
 
   async function userData() {
     try {
@@ -83,74 +83,73 @@ function Header({ handleLogout }) {
             onClick={() => setShowMenu(true)}
           />
 
-          {showMenu && (
-            <div className="modalEditProfile">
-              <div className="formEditProfile">
-                <div className="formEditProfileHeader">
-                  <h2>Editar Perfil</h2>
-                  <img
-                    className="closeIcon"
-                    src={closeIcon}
-                    alt="close"
-                    onClick={handleCloseMenu}
-                  />
-                </div>
-                <form onSubmit={handleSubmit}>
-                  <label>
-                    Nome
-                    <input
-                      type="text"
-                      name="name"
-                      value={form.name}
-                      onChange={(e) => handleChangeForm(e)}
-                    />
-                  </label>
+          <span className="userName">{user.nome}</span>
 
-                  <label>
-                    E-mail
-                    <input
-                      type="text"
-                      name="email"
-                      value={form.email}
-                      onChange={(e) => handleChangeForm(e)}
-                    />
-                  </label>
-
-                  <label>
-                    Senha
-                    <input
-                      type="password"
-                      name="password"
-                      value={form.password}
-                      onChange={(e) => handleChangeForm(e)}
-                    />
-                  </label>
-
-                  <label>
-                    Confirmação de senha
-                    <input
-                      type="password"
-                      name="passwordConfirmation"
-                      value={form.passwordConfirmation}
-                      onChange={(e) => handleChangeForm(e)}
-                    />
-                  </label>
-
-                  <button className="btn btn-confirm">Confirmar</button>
-                </form>
+          <img
+            className="logoutIcon"
+            src={LogoutIcon}
+            alt="logout"
+            onClick={() => handleLogout()}
+          />
+        </div>
+        {showMenu && (
+          <div className="modalEditProfile">
+            <div className="formEditProfile">
+              <div className="formEditProfileHeader">
+                <h2>Editar Perfil</h2>
+                <img
+                  className="closeIcon"
+                  src={closeIcon}
+                  alt="close"
+                  onClick={handleCloseMenu}
+                />
               </div>
+              <form onSubmit={handleSubmit}>
+                <label>
+                  Nome
+                  <input
+                    type="text"
+                    name="name"
+                    value={form.name}
+                    onChange={(e) => handleChangeForm(e)}
+                  />
+                </label>
+
+                <label>
+                  E-mail
+                  <input
+                    type="text"
+                    name="email"
+                    value={form.email}
+                    onChange={(e) => handleChangeForm(e)}
+                  />
+                </label>
+
+                <label>
+                  Senha
+                  <input
+                    type="password"
+                    name="password"
+                    value={form.password}
+                    onChange={(e) => handleChangeForm(e)}
+                  />
+                </label>
+
+                <label>
+                  Confirmação de senha
+                  <input
+                    type="password"
+                    name="passwordConfirmation"
+                    value={form.passwordConfirmation}
+                    onChange={(e) => handleChangeForm(e)}
+                  />
+                </label>
+
+                <button className="btn btn-confirm">Confirmar</button>
+              </form>
             </div>
-          )}
-        </div>
-        <div className="userContainer">
-          <span>{user.nome}</span>
-        </div>
-        <img
-          className="logoutIcon"
-          src={LogoutIcon}
-          alt="logout"
-          onClick={() => handleLogout()}
-        />
+          </div>
+        )}
       </div>
     </header>
   );

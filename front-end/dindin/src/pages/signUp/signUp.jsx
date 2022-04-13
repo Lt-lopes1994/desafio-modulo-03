@@ -2,6 +2,7 @@ import "./style.css";
 import Logo from "../../components/logo/";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -23,24 +24,37 @@ function SignUp() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (form.password !== form.passwordConfirmation) {
+      alert("As senhas não conferem");
+      return;
+    }
+
+    if (
+      !form.name ||
+      !form.email ||
+      !form.password ||
+      !form.passwordConfirmation
+    ) {
+      alert("Preencha todos os campos");
+      return;
+    }
+
     try {
-      if (form.password !== form.passwordConfirmation) {
-        alert("As senhas não conferem");
-        return;
-      }
+      const response = await api.post("/usuario", {
+        nome: form.name,
+        email: form.email,
+        senha: form.password,
+      });
 
-      if (
-        !form.name ||
-        !form.email ||
-        !form.password ||
-        !form.passwordConfirmation
-      ) {
-        alert("Preencha todos os campos");
-        return;
-      }
+      const token = response.data.token;
 
-      navigate("/main");
-    } catch (error) {}
+      localStorage.setItem("token", token);
+
+      alert("Cadastro realizado com sucesso!");
+      navigate("/");
+    } catch (error) {
+      alert(error.data.mensagem);
+    }
   }
 
   return (
