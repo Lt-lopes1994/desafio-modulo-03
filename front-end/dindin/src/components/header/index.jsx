@@ -29,8 +29,6 @@ function Header({ handleLogout }) {
 
   function handleCloseMenu() {
     setShowMenu(false);
-    console.log(user);
-    console.log(form);
   }
 
   useEffect(() => {
@@ -46,44 +44,39 @@ function Header({ handleLogout }) {
 
       setUser(response.data);
     } catch (error) {
-      alert(error.data);
+      alert(error);
     }
   }
-
-  // async function updateUserData() {
-  //   try {
-  //     const response = await api.put("/usuario", form, {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("token", {})}`,
-  //       },
-  //     });
-
-  //     alert("Usuário atualizado com sucesso!");
-  //   } catch (error) {
-  //     alert(error.data);
-  //   }
-  // }
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    try {
-      if (form.password !== form.passwordConfirmation) {
-        alert("As senhas não conferem");
-        return;
-      }
+    if (form.password !== form.passwordConfirmation) {
+      alert("As senhas não conferem");
+      return;
+    }
 
-      if (
-        !form.name ||
-        !form.email ||
-        !form.password ||
-        !form.passwordConfirmation
-      ) {
-        alert("Preencha todos os campos");
-        return;
-      }
+    if (
+      !form.name ||
+      !form.email ||
+      !form.password ||
+      !form.passwordConfirmation
+    ) {
+      alert("Preencha todos os campos");
+      return;
+    }
+
+    try {
+      const response = await api.put("/usuario", {
+        nome: form.name,
+        email: form.email,
+        senha: form.password,
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+
+      alert("Usuário atualizado com sucesso!");
     } catch (error) {
-      alert(error.response.message);
+      alert(error);
     }
   }
 

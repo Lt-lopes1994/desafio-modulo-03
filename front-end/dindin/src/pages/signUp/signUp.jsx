@@ -46,10 +46,6 @@ function SignUp() {
         senha: form.password,
       });
 
-      const token = response.data.token;
-
-      localStorage.setItem("token", token);
-
       alert("Cadastro realizado com sucesso!");
       navigate("/");
     } catch (error) {
