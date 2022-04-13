@@ -24,13 +24,7 @@
   margin-top: 8px;
 }
 
-.containerMain {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.containerFilter {
 }
 
 .filterContent {
@@ -45,7 +39,7 @@
 
   width: 800px;
   height: 270px;
-  margin-top: 80px;
+
   margin-right: 160px;
 }
 
