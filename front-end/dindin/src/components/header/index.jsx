@@ -3,13 +3,11 @@ import Logo from "../logo";
 import ProfileIcon from "../../assets/profileIcon.svg";
 import LogoutIcon from "../../assets/logout.svg";
 import closeIcon from "../../assets/closeIcon.svg";
-import { useNavigate } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 
 function Header({ handleLogout }) {
-  const navigate = useNavigate();
-
   const [showMenu, setShowMenu] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -20,14 +18,19 @@ function Header({ handleLogout }) {
   const [user, setUser] = useState({});
 
   function handleChangeForm(e) {
+    setForm({ ...form, name: user.nome, email: user.email });
     setForm({
       ...form,
+      name: user.nome,
+      email: user.email,
       [e.target.name]: e.target.value,
     });
   }
 
   function handleCloseMenu() {
     setShowMenu(false);
+    console.log(user);
+    console.log(form);
   }
 
   useEffect(() => {
@@ -42,11 +45,24 @@ function Header({ handleLogout }) {
       });
 
       setUser(response.data);
-      console.log(user);
     } catch (error) {
-      console.log(error.data);
+      alert(error.data);
     }
   }
+
+  // async function updateUserData() {
+  //   try {
+  //     const response = await api.put("/usuario", form, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("token", {})}`,
+  //       },
+  //     });
+
+  //     alert("Usuário atualizado com sucesso!");
+  //   } catch (error) {
+  //     alert(error.data);
+  //   }
+  // }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -110,7 +126,7 @@ function Header({ handleLogout }) {
                   <input
                     type="text"
                     name="name"
-                    value={form.name}
+                    value={form.nome}
                     onChange={(e) => handleChangeForm(e)}
                   />
                 </label>
