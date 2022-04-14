@@ -3,6 +3,7 @@ import "./style.css";
 function ConfirmationPopup({
   showConfirmationPopup,
   setShowConfirmationPopup,
+  handleDelete,
 }) {
   return (
     <>

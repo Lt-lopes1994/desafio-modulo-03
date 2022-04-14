@@ -33,6 +33,17 @@ function Main() {
     filter ? setFilter(false) : setFilter(true);
   }
 
+  async function handleDelete(id) {
+    try {
+      const response = await api.delete(`/transactions/${id}`);
+      setTransactions(
+        transactions.filter((transaction) => transaction.id !== id)
+      );
+    } catch (error) {
+      alert(error);
+    }
+  }
+
   async function handleLogout() {
     localStorage.removeItem("token");
 
@@ -91,6 +102,7 @@ function Main() {
                 <ConfirmationPopup
                   showConfirmationPopup={showConfirmationPopup}
                   setShowConfirmationPopup={setShowConfirmationPopup}
+                  handleDelete={handleDelete}
                 />
               </div>
             </div>

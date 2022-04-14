@@ -33,14 +33,11 @@ function Header({ handleLogout }) {
 
   useEffect(() => {
     userData();
-  }, []); // eslint-disable-line
+  }, [() => handleSubmit()]); // eslint-disable-line
 
   async function userData() {
     try {
-      //! Autorização. Função de autorização necessária pra validar o usuario.
-      const response = await api.get("/usuario", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
+      const response = await api.get("/usuario");
 
       setUser(response.data);
     } catch (error) {
@@ -66,13 +63,14 @@ function Header({ handleLogout }) {
       return;
     }
 
+    const data = JSON.stringify({
+      nome: form.name,
+      email: form.email,
+      senha: form.password,
+    });
+
     try {
-      const response = await api.put("/usuario", {
-        nome: form.name,
-        email: form.email,
-        senha: form.password,
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
+      await api.put("/usuario", data);
 
       alert("Usuário atualizado com sucesso!");
     } catch (error) {
@@ -119,7 +117,7 @@ function Header({ handleLogout }) {
                   <input
                     type="text"
                     name="name"
-                    value={form.nome}
+                    value={form.name}
                     onChange={(e) => handleChangeForm(e)}
                   />
                 </label>
