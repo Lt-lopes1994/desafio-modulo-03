@@ -2,7 +2,7 @@ import "./style.css";
 import FilterIcon from "../../assets/filterIcon.svg";
 import SumIcon from "../../assets/sumIcon.svg";
 
-function Filter({ filter, handlePopup }) {
+function Filter({ filter, handlePopupFilter }) {
   return (
     <div className="containerFilter">
       <div className="backgroundFilterIcon">
@@ -10,7 +10,7 @@ function Filter({ filter, handlePopup }) {
           className="filterIcon"
           src={FilterIcon}
           alt="Filter"
-          onClick={handlePopup}
+          onClick={handlePopupFilter}
         />
       </div>
       {filter && (

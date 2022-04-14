@@ -30,7 +30,6 @@
 .tableDetails {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   gap: 70px;
   margin-bottom: 5px;
 }
@@ -49,9 +48,6 @@
 }
 
 .icons {
-  position: absolute;
-  right: 410px;
-
   cursor: pointer;
 }
 

@@ -1,0 +1,49 @@
+.containerMainPopup {
+  width: 111px;
+  height: 46px;
+  margin-top: 3px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  background: #e4f2fd;
+  border-radius: 4px;
+}
+
+.buttonsPopup {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  margin-top: 4px;
+}
+
+.btnYes {
+  all: unset;
+  width: 37px;
+  height: 15px;
+
+  background: #3a9ff1;
+  border-radius: 4px;
+
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+.btnNo {
+  all: unset;
+  width: 37px;
+  height: 15px;
+
+  background: #ff576b;
+  border-radius: 4px;
+
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  color: #ffffff;
+}
