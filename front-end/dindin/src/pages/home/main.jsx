@@ -10,6 +10,7 @@ import DeleteIcon from "../../assets/deleteIcon.svg";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 import api from "../../services/api";
 
 function Main() {
@@ -35,7 +36,7 @@ function Main() {
     try {
       navigate("/");
     } catch (error) {
-      alert(error.response.data);
+      alert(error);
     }
   }
 
@@ -44,9 +45,8 @@ function Main() {
       const response = await api.get("/transacao");
 
       setTransactions(response.data);
-      console.log(response.data);
     } catch (error) {
-      alert(error.response.data);
+      alert(error);
     }
   }
 
@@ -77,17 +77,31 @@ function Main() {
 
             {transactions.map((transaction) => (
               <div key={transaction.id} className="userDetails">
-                <span>{transaction.data}</span>
-                <span>{transaction.data}</span>
-                <span>{transaction.descricao}</span>
-                <span>{transaction.categoria_nome}</span>
-                <span
-                  style={{
-                    color: `${transaction.tipo} === "entrada" ? #7B61FF : #FA8C10 `,
-                  }}
-                >
-                  {transaction.valor}
-                </span>
+                <div className="dateNumbers">
+                  <span>{format(new Date(transaction.data), "dd/MM/yy")}</span>
+                </div>
+
+                <div className="dateDayWeek">
+                  <span>{format(new Date(transaction.data), "cccc")}</span>
+                </div>
+
+                <div className="description">
+                  <span>{transaction.descricao}</span>
+                </div>
+
+                <div className="category">
+                  <span>{transaction.categoria_nome}</span>
+                </div>
+
+                <div className="value">
+                  <span
+                    style={{
+                      color: `${transaction.tipo} === "entrada" ? #7B61FF : #FA8C10 `,
+                    }}
+                  >
+                    {transaction.valor}
+                  </span>
+                </div>
                 <div className="icons">
                   <img
                     name="Editar Registro"

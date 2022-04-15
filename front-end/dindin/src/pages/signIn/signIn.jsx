@@ -13,8 +13,6 @@ function SignIn() {
   function handleSignUp(e) {
     e.preventDefault();
 
-    console.log("aqui");
-
     navigate("/signUp");
   }
 
@@ -38,7 +36,7 @@ function SignIn() {
 
       navigate("/main");
     } catch (error) {
-      console.log(error.data.mensagem);
+      alert(error);
     }
   }
 

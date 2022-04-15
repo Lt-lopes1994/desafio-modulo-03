@@ -2,6 +2,7 @@ import "./style.css";
 import closeIcon from "../../assets/closeIcon.svg";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
+import { format, formatISO } from "date-fns";
 
 function Modal({ showModal, setShowModal, modalName, setModalName }) {
   const [buttonEntries, setButtonEntries] = useState(true);
@@ -49,15 +50,14 @@ function Modal({ showModal, setShowModal, modalName, setModalName }) {
     data.tipo = `${buttonEntries ? "entrada" : "saida"}`;
     data.valor = +data.valor;
     data.categoria_id = +data.categoria_id;
-    data.data = new Date();
+    data.data = formatISO(new Date(data.data));
+
     console.log(data);
-
     try {
-      const response = await api[
-        `${modalName === "Adicionar Registro" ? "post" : "put"}`
-      ](`/transacao`, data);
-
-      console.log(response);
+      await api[`${modalName === "Adicionar Registro" ? "post" : "put"}`](
+        `/transacao`,
+        data
+      );
     } catch (error) {
       alert(error);
     }
