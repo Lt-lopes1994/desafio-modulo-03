@@ -1,17 +1,28 @@
 import "./style.css";
+import api from "../../services/api";
 
 function ConfirmationPopup({
   showConfirmationPopup,
   setShowConfirmationPopup,
-  handleDelete,
+  id,
 }) {
+  async function handleDelete() {
+    try {
+      const response = await api.delete(`/transacoes/${id}`); // eslint-disable-line
+    } catch (error) {
+      alert(error);
+    }
+  }
+
   return (
     <>
       {showConfirmationPopup && (
         <div className="containerMainPopup">
           <span>Apagar Iten?</span>
           <div className="buttonsPopup">
-            <button className="btnYes">Sim</button>
+            <button onClick={() => handleDelete()} className="btnYes">
+              Sim
+            </button>
             <button
               type="button"
               onClick={() => setShowConfirmationPopup(false)}

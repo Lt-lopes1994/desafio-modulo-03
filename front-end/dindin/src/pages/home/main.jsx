@@ -8,7 +8,7 @@ import ArrowFilter from "../../assets/arrowFilterIcon.svg";
 import EditIcon from "../../assets/editIcon.svg";
 import DeleteIcon from "../../assets/deleteIcon.svg";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 
@@ -25,23 +25,8 @@ function Main() {
     setModalName(e.target.name);
   }
 
-  function handleDeletePopup(e) {
-    setShowConfirmationPopup(true);
-  }
-
   function handlePopupFilter() {
     filter ? setFilter(false) : setFilter(true);
-  }
-
-  async function handleDelete(id) {
-    try {
-      const response = await api.delete(`/transactions/${id}`);
-      setTransactions(
-        transactions.filter((transaction) => transaction.id !== id)
-      );
-    } catch (error) {
-      alert(error);
-    }
   }
 
   async function handleLogout() {
@@ -53,6 +38,21 @@ function Main() {
       alert(error.response.data);
     }
   }
+
+  async function handleTransaction() {
+    try {
+      const response = await api.get("/transacao");
+
+      setTransactions(response.data);
+      console.log(response.data);
+    } catch (error) {
+      alert(error.response.data);
+    }
+  }
+
+  useEffect(() => {
+    handleTransaction();
+  }, [setTransactions]);
 
   return (
     <div className="containerMain">
@@ -75,46 +75,15 @@ function Main() {
               <h3>Valor</h3>
             </div>
 
-            <div className="userDetails">
-              <span>14/04/2022</span>
-              <span>quinta</span>
-              <span>Venda de doces</span>
-              <span>pix</span>
-              <span
-              // style={{
-              //   color: `${transaction.tipo} = entrada ? #7B61FF : #FA8C10 `,
-              // }}
-              >
-                R$200,00
-              </span>
-              <div className="icons">
-                <img
-                  name="Editar Registro"
-                  onClick={(e) => handleEditModal(e)}
-                  src={EditIcon}
-                  alt="Editar"
-                />
-                <img
-                  onClick={(e) => handleDeletePopup(e)}
-                  src={DeleteIcon}
-                  alt="Deletar"
-                />
-                <ConfirmationPopup
-                  showConfirmationPopup={showConfirmationPopup}
-                  setShowConfirmationPopup={setShowConfirmationPopup}
-                  handleDelete={handleDelete}
-                />
-              </div>
-            </div>
-            {/* {transactions.map((transaction) => (
-              <div className="userDetails">
+            {transactions.map((transaction) => (
+              <div key={transaction.id} className="userDetails">
                 <span>{transaction.data}</span>
                 <span>{transaction.data}</span>
                 <span>{transaction.descricao}</span>
                 <span>{transaction.categoria_nome}</span>
                 <span
                   style={{
-                    color: `${transaction.tipo} = entrada ? #7B61FF : #FA8C10 `,
+                    color: `${transaction.tipo} === "entrada" ? #7B61FF : #FA8C10 `,
                   }}
                 >
                   {transaction.valor}
@@ -127,9 +96,14 @@ function Main() {
                     alt="Editar"
                   />
                   <img src={DeleteIcon} alt="Deletar" />
+                  <ConfirmationPopup
+                    showConfirmationPopup={showConfirmationPopup}
+                    setShowConfirmationPopup={setShowConfirmationPopup}
+                    id={transactions.id}
+                  />
                 </div>
               </div>
-            ))} */}
+            ))}
           </div>
 
           <div className="right">

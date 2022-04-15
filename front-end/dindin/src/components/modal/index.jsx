@@ -1,10 +1,19 @@
 import "./style.css";
 import closeIcon from "../../assets/closeIcon.svg";
-import { useState } from "react";
+import api from "../../services/api";
+import { useEffect, useState } from "react";
 
 function Modal({ showModal, setShowModal, modalName, setModalName }) {
   const [buttonEntries, setButtonEntries] = useState(true);
   const [buttonExits, setButtonExits] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState({
+    tipo: "",
+    valor: 0,
+    categoria_id: 0,
+    data: "",
+    descricao: "",
+  });
 
   function handleButtonEntries() {
     setButtonEntries(true);
@@ -19,6 +28,45 @@ function Modal({ showModal, setShowModal, modalName, setModalName }) {
   function handleCloseModal() {
     setShowModal(false);
   }
+
+  function handleInfos(e) {
+    setCategory({
+      ...category,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  async function handleCategories() {
+    const response = await api.get("/categoria");
+    setCategories(response.data);
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const data = category;
+
+    data.tipo = `${buttonEntries ? "entrada" : "saida"}`;
+    data.valor = +data.valor;
+    data.categoria_id = +data.categoria_id;
+    data.data = new Date();
+    console.log(data);
+
+    try {
+      const response = await api[
+        `${modalName === "Adicionar Registro" ? "post" : "put"}`
+      ](`/transacao`, data);
+
+      console.log(response);
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  useEffect(() => {
+    handleCategories();
+  }, []);
+
   return (
     <>
       {showModal && (
@@ -51,46 +99,48 @@ function Modal({ showModal, setShowModal, modalName, setModalName }) {
             </div>
 
             <div className="containerForm">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <label>
                   Valor
-                  <input type="text" />
+                  <input
+                    type="text"
+                    name="valor"
+                    onChange={(e) => handleInfos(e)}
+                  />
                 </label>
 
                 <label>
                   Categoria
-                  <select id="pet-select">
-                    <option value="">--Selecione--</option>
-                    <option value="Alimentação">Alimentação</option>
-                    <option value="Assinaturas-e-Serviços">
-                      Assinaturas e Serviços
-                    </option>
-                    <option value="Casa">Casa</option>
-                    <option value="Mercado">Mercado</option>
-                    <option value="Cuidados-Pessoais">Cuidados Pessoais</option>
-                    <option value="Educação">Educação</option>
-                    <option value="Família">Família</option>
-                    <option value="Lazer">Lazer</option>
-                    <option value="Pets">Pets</option>
-                    <option value="Presentes">Presentes</option>
-                    <option value="Roupas">Roupas</option>
-                    <option value="Saúde">Saúde</option>
-                    <option value="Transporte">Transporte</option>
-                    <option value="Salário">Salário</option>
-                    <option value="Vendas">Vendas</option>
-                    <option value="Outras-receitas">Outras receitas</option>
-                    <option value="Outras-despesas">Outras despesas</option>
+                  <select
+                    id="categories"
+                    name="categoria_id"
+                    onChange={(e) => handleInfos(e)}
+                  >
+                    <option value=""> ---Selecione uma categoria--- </option>
+                    {categories.map((category) => (
+                      <option key={category.id} value={category.id}>
+                        {category.descricao}
+                      </option>
+                    ))}
                   </select>
                 </label>
 
                 <label>
                   Data
-                  <input type="text" />
+                  <input
+                    type="date"
+                    name="data"
+                    onChange={(e) => handleInfos(e)}
+                  />
                 </label>
 
                 <label>
                   descrição
-                  <input type="text" />
+                  <input
+                    type="text"
+                    name="descricao"
+                    onChange={(e) => handleInfos(e)}
+                  />
                 </label>
 
                 <button className="btnConfirm">Confirmar</button>
