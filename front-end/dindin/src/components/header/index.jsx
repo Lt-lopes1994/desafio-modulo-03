@@ -18,11 +18,9 @@ function Header({ handleLogout }) {
   const [user, setUser] = useState({});
 
   function handleChangeForm(e) {
-    setForm({ ...form, name: user.nome, email: user.email });
     setForm({
       ...form,
-      name: user.nome,
-      email: user.email,
+
       [e.target.name]: e.target.value,
     });
   }

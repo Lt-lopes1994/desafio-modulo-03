@@ -24,7 +24,7 @@ function Main() {
 
   function handleEditModal(e) {
     setShowModal(true);
-    setModalName(e.target.index);
+    setModalName(e.target.name);
   }
 
   function handleConfirmationPopup(e) {
