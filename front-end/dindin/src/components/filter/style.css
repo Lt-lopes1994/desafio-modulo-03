@@ -1,0 +1,131 @@
+.containerFilter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.backgroundFilterIcon {
+  background: #fafafa;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  width: 80px;
+  height: 30px;
+
+  position: absolute;
+  left: 200px;
+  top: 230px;
+  text-align: center;
+}
+
+.backgroundFilterIcon img {
+  margin-top: 8px;
+}
+
+.containerFilter {
+}
+
+.filterContent {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+
+  background-color: #fafafa;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  width: 800px;
+  height: 270px;
+
+  margin-right: 160px;
+}
+
+.filterOptions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.filterOptions h5 {
+  margin-bottom: 15px;
+}
+
+.filterOptionsContent {
+  display: flex;
+  flex-direction: wrap;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  width: 450px;
+  height: 200px;
+  align-items: center;
+}
+
+.filterOptionsContent li {
+  all: unset;
+
+  background: #fafafa;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  height: 40px;
+  padding: 4px;
+
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+
+  display: flex;
+  align-items: center;
+}
+
+.filterOptionsContent img {
+  margin-left: 40px;
+}
+
+.filterButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 290px;
+  height: 50px;
+}
+
+.btnClean {
+  width: 98px;
+  height: 30px;
+
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+
+  text-align: center;
+
+  background: #fafafa;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.btnAply {
+  width: 98px;
+  height: 30px;
+
+  background: #7978d9;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  text-align: center;
+
+  color: #ffffff;
+}

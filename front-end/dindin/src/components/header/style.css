@@ -1,0 +1,118 @@
+.headerBackground {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 0;
+
+  width: 100vw;
+  height: 224px;
+  margin-top: -309px;
+
+  background: linear-gradient(90.23deg, #05ede3 0.02%, #645ffb 99.63%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.containerProfile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  right: 10px;
+}
+
+.profileIcon {
+  cursor: pointer;
+}
+
+.userName {
+  color: #fff;
+  margin-right: 5px;
+}
+
+.logoutIcon {
+  cursor: pointer;
+}
+
+.modalEditProfile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.formEditProfileHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.formEditProfile {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 550px;
+  height: 550px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: left;
+  margin: 5px;
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.formEditProfileHeader {
+  margin-bottom: 15px;
+}
+
+.formEditProfile form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 400px;
+  min-height: 400px;
+  gap: 15px;
+}
+
+form label {
+  color: #484848;
+}
+
+form input {
+  all: unset;
+
+  width: 300px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  padding: 5px;
+
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.closeIcon {
+  cursor: pointer;
+}
+
+.closeIcon:hover {
+  transform: scale(0.9);
+}
+
+.btn-confirm {
+  width: 300px;
+  height: 40px;
+  color: #fff;
+
+  font-weight: 700;
+  font-size: 14px;
+}

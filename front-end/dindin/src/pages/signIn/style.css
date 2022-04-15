@@ -1,4 +1,4 @@
-.containerContent {
+.containerContentSignIn {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -11,7 +11,7 @@
   position: relative;
 }
 
-.left {
+.leftSigIn {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +21,7 @@
   margin-left: 100px;
 }
 
-.left strong {
+.leftSigIn strong {
   color: #7978d9;
 }
 
@@ -53,7 +53,7 @@ p {
   font-size: 28px;
 }
 
-.right {
+.rightSignIn {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,7 +65,7 @@ p {
   margin-right: 200px;
 }
 
-.right h2 {
+.rightSignIn h2 {
   margin-bottom: 55px;
 
   font-family: "Rubik";
