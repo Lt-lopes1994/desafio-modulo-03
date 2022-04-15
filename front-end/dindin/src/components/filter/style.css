@@ -24,9 +24,6 @@
   margin-top: 8px;
 }
 
-.containerFilter {
-}
-
 .filterContent {
   display: flex;
   flex-direction: column;
@@ -60,8 +57,9 @@
   flex-wrap: wrap;
   gap: 10px;
 
-  width: 450px;
+  width: 750px;
   height: 200px;
+  padding: 5px;
   align-items: center;
 }
 
@@ -99,6 +97,9 @@
 }
 
 .btnClean {
+  all: unset;
+  cursor: pointer;
+
   width: 98px;
   height: 30px;
 
@@ -115,6 +116,9 @@
 }
 
 .btnAply {
+  all: unset;
+  cursor: pointer;
+
   width: 98px;
   height: 30px;
 
@@ -129,4 +133,9 @@
   text-align: center;
 
   color: #ffffff;
+}
+
+.btnClean:hover,
+.btnAply:hover {
+  transform: scale(1.1);
 }

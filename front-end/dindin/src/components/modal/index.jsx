@@ -65,7 +65,7 @@ function Modal({ showModal, setShowModal, modalName, setModalName }) {
 
   useEffect(() => {
     handleCategories();
-  }, []);
+  }, [() => handleSubmit()]); //eslint-disable-line
 
   return (
     <>
@@ -143,7 +143,9 @@ function Modal({ showModal, setShowModal, modalName, setModalName }) {
                   />
                 </label>
 
-                <button className="btnConfirm">Confirmar</button>
+                <button type="submit" className="btnConfirm">
+                  Confirmar
+                </button>
               </form>
             </div>
           </div>

@@ -20,10 +20,16 @@ function Main() {
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
   const [modalName, setModalName] = useState("");
   const [transactions, setTransactions] = useState([]);
+  const [transactionId, setTransactionId] = useState(0);
 
   function handleEditModal(e) {
     setShowModal(true);
-    setModalName(e.target.name);
+    setModalName(e.target.index);
+  }
+
+  function handleConfirmationPopup(e) {
+    setTransactionId(e.target.index);
+    console.log(transactionId.indexOf(e.target.index));
   }
 
   function handlePopupFilter() {
@@ -99,7 +105,7 @@ function Main() {
                       color: `${transaction.tipo} === "entrada" ? #7B61FF : #FA8C10 `,
                     }}
                   >
-                    {transaction.valor}
+                    R$ {transaction.valor.toFixed(2)}
                   </span>
                 </div>
                 <div className="icons">
@@ -109,11 +115,14 @@ function Main() {
                     src={EditIcon}
                     alt="Editar"
                   />
-                  <img src={DeleteIcon} alt="Deletar" />
+                  <img
+                    src={DeleteIcon}
+                    alt="Deletar"
+                    onClick={(e) => handleConfirmationPopup(e)}
+                  />
                   <ConfirmationPopup
                     showConfirmationPopup={showConfirmationPopup}
                     setShowConfirmationPopup={setShowConfirmationPopup}
-                    id={transactions.id}
                   />
                 </div>
               </div>
