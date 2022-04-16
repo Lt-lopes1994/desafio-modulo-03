@@ -40,7 +40,7 @@ async function detalharUsuario(req, res){
         const consultaUsuario=await conexao.query(queryConsultaUsuario, [usuario.id]);
 
         if(consultaUsuario.rowCount===0){
-            return res.status(404).json({mensagem: 'O usuário não foi encontrado'});
+            return res.status(404).json({mensagem: 'O usuário não foi encontrado.'});
         }
 
         return res.status(200).json(usuario);    
@@ -58,14 +58,7 @@ async function atualizarUsuario(req, res){
         const consultaUsuario=await conexao.query(queryConsultaUsuario, [usuario.id]);
 
         if(consultaUsuario.rowCount===0){
-            return res.status(404).json({mensagem: 'O usuário não foi encontrado'});
-        }
-
-        const queryConsultaEmail='select * from usuarios where email=$1';
-        const consultaEmail=await conexao.query(queryConsultaEmail, [email]);
-
-        if(consultaEmail.rowCount>0){
-            return res.status(404).json({mensagem: 'Já existe usuário cadastrado com o e-mail informado.'});
+            return res.status(404).json({mensagem: 'O usuário não foi encontrado.'});
         }
         
         const senhaCriptografada=await bcrypt.hash(senha, 10);
@@ -79,7 +72,7 @@ async function atualizarUsuario(req, res){
 
         return res.status(204).json();
     } catch (error) {
-        return res.status(500).json({mensagem: error.message});
+        return res.status(404).json({mensagem: 'Já existe usuário cadastrado com o e-mail informado.'});
     }
 }
 
