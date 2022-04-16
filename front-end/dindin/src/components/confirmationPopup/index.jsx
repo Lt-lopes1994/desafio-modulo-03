@@ -2,13 +2,15 @@ import "./style.css";
 import api from "../../services/api";
 
 function ConfirmationPopup({
+  stateTransaction,
+  transaction,
   showConfirmationPopup,
   setShowConfirmationPopup,
   id,
 }) {
   async function handleDelete() {
     try {
-      const response = await api.delete(`/transacoes/${id}`); // eslint-disable-line
+      const response = await api.delete(`/transacao/${id}`); // eslint-disable-line
     } catch (error) {
       alert(error);
     }

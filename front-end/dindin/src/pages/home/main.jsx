@@ -20,6 +20,8 @@ function Main() {
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
   const [modalName, setModalName] = useState("");
   const [transactions, setTransactions] = useState([]);
+  const [stateTransaction, setStateTransaction] = useState([]);
+  const [statement, setStatement] = useState([]);
   const [transactionId, setTransactionId] = useState(0);
 
   function handleEditModal(e) {
@@ -28,12 +30,20 @@ function Main() {
   }
 
   function handleConfirmationPopup(e) {
-    setTransactionId(e.target.index);
-    console.log(transactionId.indexOf(e.target.index));
+    setTransactionId(e.target.id);
+    setShowConfirmationPopup(true);
   }
 
   function handlePopupFilter() {
     filter ? setFilter(false) : setFilter(true);
+  }
+
+  function balance(entries, exits) {
+    let balance = 0;
+
+    balance = entries - exits;
+
+    return balance;
   }
 
   async function handleLogout() {
@@ -56,8 +66,19 @@ function Main() {
     }
   }
 
+  async function handleBalance() {
+    try {
+      const response = await api.get("/transacao/extrato");
+
+      setStatement(response.data);
+    } catch (error) {
+      alert(error);
+    }
+  }
+
   useEffect(() => {
     handleTransaction();
+    handleBalance();
   }, [setTransactions]);
 
   return (
@@ -101,9 +122,9 @@ function Main() {
 
                 <div className="value">
                   <span
-                    style={{
-                      color: `${transaction.tipo} === "entrada" ? #7B61FF : #FA8C10 `,
-                    }}
+                    className={`${
+                      transaction.tipo === "entrada" ? "positive" : "negative"
+                    }`}
                   >
                     R$ {transaction.valor.toFixed(2)}
                   </span>
@@ -123,6 +144,9 @@ function Main() {
                   <ConfirmationPopup
                     showConfirmationPopup={showConfirmationPopup}
                     setShowConfirmationPopup={setShowConfirmationPopup}
+                    stateTransaction={stateTransaction}
+                    id={transaction.id}
+                    transaction={transaction}
                   />
                 </div>
               </div>
@@ -135,19 +159,27 @@ function Main() {
               <div className="financialEntries">
                 <div className="entries">
                   <span>Entradas</span>
-                  <span className="entriesValues">{}</span>
+                  <span className="entriesValues"> R$ {statement.entrada}</span>
                 </div>
 
                 <div className="exits">
                   <span>Saídas</span>
-                  <span className="exitValues">R$100</span>
+                  <span className="exitValues"> R$ {statement.saida}</span>
                 </div>
 
                 <div className="horizontalLine"></div>
 
                 <div className="balance">
                   <span>Saldo</span>
-                  <span className="balanceValues">R$200</span>
+                  <span
+                    className={`balanceValues ${
+                      balance(statement.entrada, statement.saida) > 0
+                        ? "positive"
+                        : "negative"
+                    }`}
+                  >
+                    R$ {balance(statement.entrada, statement.saida).toFixed(2)}
+                  </span>
                 </div>
               </div>
             </div>

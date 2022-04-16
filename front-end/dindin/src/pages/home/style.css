@@ -223,6 +223,12 @@
 .balanceValues {
   font-weight: 500;
   font-size: 14px;
+}
 
-  color: #3a9ff1;
+.positive {
+  color: #0c71c4;
+}
+
+.negative {
+  color: #fa8c10;
 }

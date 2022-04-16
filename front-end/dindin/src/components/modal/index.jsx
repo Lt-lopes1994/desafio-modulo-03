@@ -52,7 +52,6 @@ function Modal({ showModal, setShowModal, modalName, setModalName }) {
     data.categoria_id = +data.categoria_id;
     data.data = formatISO(new Date(data.data));
 
-    console.log(data);
     try {
       await api[`${modalName === "Adicionar Registro" ? "post" : "put"}`](
         `/transacao`,
