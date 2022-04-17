@@ -49,7 +49,7 @@ function SignUp() {
       alert("Cadastro realizado com sucesso!");
       navigate("/");
     } catch (error) {
-      alert(error.data.mensagem);
+      alert(error);
     }
   }
 
