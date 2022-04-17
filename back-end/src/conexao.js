@@ -13,5 +13,10 @@ const query = (text, param) => {
 };
 
 module.exports = {
+<<<<<<< HEAD
   query,
 };
+=======
+    query
+}
+>>>>>>> 15d8a02c82656ada72b193d15e30c1caf0c559d2
